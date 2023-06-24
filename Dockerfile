@@ -18,8 +18,8 @@ RUN mkdir -p ${ANDROID_SDK_ROOT}/cmdline-tools && \
     unzip -q commandlinetools.zip -d ${ANDROID_SDK_ROOT}/cmdline-tools && \
     rm commandlinetools.zip
 
-# Accept Android SDK licenses
-RUN yes | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --licenses
+# Set up environment variables for automatic license acceptance
+ENV SDK_MANAGER_OPTS="--sdk_root=${ANDROID_SDK_ROOT} --licenses"
 
 # Install Android SDK components
 RUN ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --update && \
