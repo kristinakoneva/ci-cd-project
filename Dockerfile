@@ -18,12 +18,11 @@ RUN mkdir -p ${ANDROID_SDK_ROOT}/cmdline-tools && \
     unzip -q commandlinetools.zip -d ${ANDROID_SDK_ROOT}/cmdline-tools && \
     rm commandlinetools.zip
 
-# Set up environment variables for automatic license acceptance
-ENV SDK_MANAGER_OPTS="--sdk_root=${ANDROID_SDK_ROOT} --licenses"
+# Accept Android SDK licenses
+RUN yes | ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --licenses
 
 # Install Android SDK components
-RUN ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager --update && \
-    ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager "platform-tools" "build-tools;30.0.3" "platforms;android-30"
+RUN ${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin/sdkmanager "platform-tools" "build-tools;30.0.3" "platforms;android-30"
 
 # Copy the Android app to the container
 COPY . /app
