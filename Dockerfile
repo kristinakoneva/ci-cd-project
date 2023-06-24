@@ -13,14 +13,14 @@ RUN apt-get --quiet update && \
     rm -rf /var/lib/apt/lists/*
 
 # Download and install Android SDK
-RUN wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip && \
-    unzip -q android-sdk.zip -d $ANDROID_SDK_ROOT && \
-    rm android-sdk.zip
+RUN wget --quiet --output-document=commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip && \
+    unzip -q commandlinetools.zip -d commandlinetools && \
+    rm commandlinetools.zip
 
 # Install Android SDK components
-RUN yes | sdkmanager --licenses && \
-    sdkmanager --update && \
-    sdkmanager "platform-tools" "build-tools;30.0.3" "platforms;android-30"
+RUN yes | commandlinetools/tools/bin/sdkmanager --licenses && \
+    commandlinetools/tools/bin/sdkmanager --update && \
+    commandlinetools/tools/bin/sdkmanager "platform-tools" "build-tools;30.0.3" "platforms;android-30"
 
 # Copy the Android app to the container
 COPY . /app
