@@ -26,7 +26,7 @@ WORKDIR /app
 RUN chmod +x ./gradlew
 
 # Build the Android app
-RUN ./gradlew assembleRelease
+RUN ./gradlew assembleRelease --stacktrace
 
 # Set the entrypoint command to start the app
 CMD ["./gradlew", "installRelease"]
