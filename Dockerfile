@@ -22,6 +22,9 @@ RUN mkdir -p ${ANDROID_SDK_ROOT}/cmdline-tools && \
 COPY . /app
 WORKDIR /app
 
+# Adjust permissions of Gradle wrapper files
+RUN chmod +x ./gradlew
+
 # Build the Android app
 RUN ./gradlew assembleRelease
 
