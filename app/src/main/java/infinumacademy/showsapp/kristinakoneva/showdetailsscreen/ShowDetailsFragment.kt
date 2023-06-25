@@ -26,6 +26,10 @@ import infinumacademy.showsapp.kristinakoneva.showsscreen.showsApp
 @Suppress("TooManyFunctions")
 class ShowDetailsFragment : Fragment() {
 
+    companion object{
+        private const val REVIEW_RATING_FORMAT = "%.2f"
+    }
+
     private var _binding: FragmentShowDetailsBinding? = null
 
     private val binding get() = _binding!!
@@ -113,7 +117,7 @@ class ShowDetailsFragment : Fragment() {
                 viewModel.showLiveData.observe(viewLifecycleOwner) { show ->
                     val numOfReviews = show.noOfReviews
                     val averageRating = show.averageRating
-                    binding.ratingStatus.rating = String.format("%.2f", averageRating).toFloat()
+                    binding.ratingStatus.rating = String.format(REVIEW_RATING_FORMAT, averageRating).toFloat()
                     binding.reviewsStatus.text = getString(R.string.review_status, numOfReviews, averageRating)
                 }
             } else {

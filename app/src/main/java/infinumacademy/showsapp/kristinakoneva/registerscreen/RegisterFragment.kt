@@ -72,8 +72,7 @@ class RegisterFragment : Fragment() {
         binding.btnRegister.setOnClickListener {
             viewModel.onRegisterButtonClicked(
                 email = binding.etEmail.text.toString(),
-                password = binding.etPassword.text.toString(),
-                sessionManager = sessionManager
+                password = binding.etPassword.text.toString()
             )
         }
     }

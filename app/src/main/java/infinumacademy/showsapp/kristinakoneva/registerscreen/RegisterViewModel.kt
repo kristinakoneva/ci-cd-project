@@ -82,7 +82,7 @@ class RegisterViewModel : ViewModel() {
         return registrationResultLiveData
     }
 
-    fun onRegisterButtonClicked(email: String, password: String, sessionManager: SessionManager) {
+    fun onRegisterButtonClicked(email: String, password: String) {
         _apiCallInProgress.value = true
         val registerRequest = RegisterRequest(
             email = email,

@@ -60,6 +60,7 @@ object NetworkLiveData : LiveData<Boolean>() {
         connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
     }
 
+    @Suppress("ReturnCount")
     fun isNetworkAvailable(): Boolean {
         val connectivityManager =
             application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

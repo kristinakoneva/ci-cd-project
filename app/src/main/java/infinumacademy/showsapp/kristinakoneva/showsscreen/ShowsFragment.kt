@@ -342,7 +342,7 @@ class ShowsFragment : Fragment() {
             stream.flush()
             stream.close()
         } catch (e: IOException) {
-            e.printStackTrace()
+            return null
         }
 
         return file.absolutePath
@@ -456,8 +456,8 @@ class ShowsFragment : Fragment() {
             val input = context.contentResolver.openInputStream(uri!!) ?: return null
             return BitmapFactory.decodeStream(input)
         } catch (e: FileNotFoundException) {
+            return null
         }
-        return null
     }
 
     /*

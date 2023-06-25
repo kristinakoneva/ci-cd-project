@@ -8,6 +8,7 @@ import okhttp3.Response
 class AuthInterceptor(context: Context) : Interceptor {
     private val sessionManager = SessionManager(context)
 
+    @Suppress("ComplexCondition")
     override fun intercept(chain: Interceptor.Chain): Response {
         val requestBuilder = chain.request().newBuilder()
         requestBuilder.addHeader(Constants.TOKEN_TYPE, Constants.BEARER)
