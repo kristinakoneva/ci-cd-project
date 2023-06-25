@@ -127,18 +127,6 @@ class ShowDetailsFragment : Fragment() {
 
     }
 
-    /*
-    private fun setReviewsStatus() {
-        val numOfReviews = viewModel.reviewsListLiveData.value?.size
-        val averageRating = viewModel.getAverageReviewsRating().toFloat()
-        viewModel.reviewsListLiveData.observe(viewLifecycleOwner){ reviewsList->
-            if(reviewsList.isNotEmpty()){
-                binding.ratingStatus.rating = String.format("%.2f", averageRating).toFloat()
-                binding.reviewsStatus.text = getString(R.string.review_status, numOfReviews, averageRating)
-            }
-        }
-    }*/
-
     private fun initBackButtonFromToolbar() {
         binding.showDetailsToolbar.setNavigationOnClickListener {
             findNavController().popBackStack()

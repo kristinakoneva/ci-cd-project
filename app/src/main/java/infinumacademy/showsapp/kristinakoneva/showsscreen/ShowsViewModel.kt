@@ -185,7 +185,10 @@ class ShowsViewModel(
             )
 
         ApiModule.retrofit.updateProfilePhoto(requestBody).enqueue(object : Callback<UpdateProfilePhotoResponse> {
-            override fun onResponse(call: Call<UpdateProfilePhotoResponse>, response: Response<UpdateProfilePhotoResponse>) {
+            override fun onResponse(
+                call: Call<UpdateProfilePhotoResponse>,
+                response: Response<UpdateProfilePhotoResponse>
+            ) {
                 if (response.isSuccessful) {
                     UserInfo.imageUrl = response.body()?.user?.imageUrl
                 }

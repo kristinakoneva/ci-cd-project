@@ -48,7 +48,7 @@ val Fragment.showsApp: ShowsApplication
         return requireActivity().application as ShowsApplication
     }
 
-@Suppress("TooManyFunctions")
+@Suppress("TooManyFunctions", "ReturnCount")
 class ShowsFragment : Fragment() {
 
     companion object {
@@ -330,6 +330,7 @@ class ShowsFragment : Fragment() {
         _binding = null
     }
 
+    @Suppress("SwallowedException")
     private fun saveToInternalStorage(bitmap: Bitmap, emailAsFileName: String): String? {
 
         val wrapper = ContextWrapper(requireContext().applicationContext)
@@ -347,18 +348,6 @@ class ShowsFragment : Fragment() {
 
         return file.absolutePath
     }
-
-    //    private fun loadImageFromStorage(path: String) {
-    //        try {
-    //            val f = File(path)
-    //            val b = BitmapFactory.decodeStream(FileInputStream(f))
-    //            binding.btnDialogChangeProfilePicOrLogout.load(b) {
-    //                transformations(CircleCropTransformation())
-    //            }
-    //        } catch (e: FileNotFoundException) {
-    //            e.printStackTrace()
-    //        }
-    //    }
 
     private fun showProfilePhoto() {
         var profilePhotoUrl: String? = null
@@ -451,6 +440,7 @@ class ShowsFragment : Fragment() {
         )
     }
 
+    @Suppress("SwallowedException")
     private fun getBitmapFromURI(context: Context, uri: Uri?): Bitmap? {
         try {
             val input = context.contentResolver.openInputStream(uri!!) ?: return null
@@ -459,21 +449,4 @@ class ShowsFragment : Fragment() {
             return null
         }
     }
-
-    /*
-    private fun rotateImageIfNecessary(path: String): Bitmap?{
-        val bitmap = BitmapFactory.decodeFile(path)
-        val file = File(path)
-        val exif = ExifInterface(file.absoluteFile.toString())
-        val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
-        val matrix = Matrix()
-        when(orientation){
-            ExifInterface.ORIENTATION_ROTATE_90 -> matrix.postRotate(90F)
-            ExifInterface.ORIENTATION_ROTATE_180 -> matrix.postRotate(180F)
-            ExifInterface.ORIENTATION_ROTATE_270 -> matrix.postRotate(270F)
-        }
-        val rotatedBitmap = Bitmap.createBitmap(bitmap, 0,0 , bitmap.width, bitmap.height, matrix, true)
-        bitmap.recycle()
-        return rotatedBitmap
-    }*/
 }

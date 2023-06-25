@@ -47,19 +47,6 @@ class ShowDetailsViewModel(
     private val _fetchReviewsResultLiveData = MutableLiveData(true)
     val fetchReviewsResultLiveData: LiveData<Boolean> = _fetchReviewsResultLiveData
 
-    /*
-    fun getAverageReviewsRating(): Double {
-        return if (_reviewsListLiveData.value != null) {
-            var total = 0.0
-            for (review in _reviewsListLiveData.value!!) {
-                total += review.rating
-            }
-            total / _reviewsListLiveData.value!!.size.toDouble()
-        } else {
-            0.0
-        }
-    }*/
-
     fun fetchShow() {
         _apiCallForFetchingShowInProgress.postValue(true)
         _apiCallInProgress.postValue(true)

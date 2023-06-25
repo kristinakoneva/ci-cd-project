@@ -8,7 +8,6 @@ import infinumacademy.showsapp.kristinakoneva.Constants
 import infinumacademy.showsapp.kristinakoneva.model.RegisterRequest
 import infinumacademy.showsapp.kristinakoneva.model.RegisterResponse
 import infinumacademy.showsapp.kristinakoneva.networking.ApiModule
-import infinumacademy.showsapp.kristinakoneva.networking.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import db.ShowsAppDatabase
 import java.lang.IllegalArgumentException
 
+@Suppress("UNCHECKED_CAST")
 class ShowDetailsViewModelFactory(
     val database: ShowsAppDatabase,
     val showId: Int
