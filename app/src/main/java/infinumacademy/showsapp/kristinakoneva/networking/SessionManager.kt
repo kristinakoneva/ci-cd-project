@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import infinumacademy.showsapp.kristinakoneva.Constants
 
+@Suppress("TooManyFunctions")
 class SessionManager(context: Context) {
     private var prefs: SharedPreferences = context.getSharedPreferences(Constants.SHOWS_APP, Context.MODE_PRIVATE)
 

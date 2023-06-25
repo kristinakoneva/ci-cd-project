@@ -49,6 +49,7 @@ fun TextView.animateOvershootPopOut() {
     this.animation.start()
 }
 
+@Suppress("TooManyFunctions")
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null

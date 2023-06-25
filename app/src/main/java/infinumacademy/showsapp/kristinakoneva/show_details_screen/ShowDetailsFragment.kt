@@ -23,6 +23,7 @@ import infinumacademy.showsapp.kristinakoneva.databinding.DialogAddReviewBinding
 import infinumacademy.showsapp.kristinakoneva.databinding.FragmentShowDetailsBinding
 import infinumacademy.showsapp.kristinakoneva.shows_screen.showsApp
 
+@Suppress("TooManyFunctions")
 class ShowDetailsFragment : Fragment() {
 
     private var _binding: FragmentShowDetailsBinding? = null

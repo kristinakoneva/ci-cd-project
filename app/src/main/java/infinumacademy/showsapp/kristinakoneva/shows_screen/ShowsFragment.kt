@@ -48,6 +48,7 @@ val Fragment.showsApp: ShowsApplication
         return requireActivity().application as ShowsApplication
     }
 
+@Suppress("TooManyFunctions")
 class ShowsFragment : Fragment() {
 
     private var _binding: FragmentShowsBinding? = null
