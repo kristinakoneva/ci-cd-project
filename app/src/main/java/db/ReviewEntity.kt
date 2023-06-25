@@ -14,3 +14,4 @@ data class ReviewEntity(
     @ColumnInfo(name = "userEmail") val userEmail: String,
     @ColumnInfo(name = "userImageUrl") val userImageUrl: String?
 )
+

@@ -1,4 +1,4 @@
-package infinumacademy.showsapp.kristinakoneva.register_screen
+package infinumacademy.showsapp.kristinakoneva.registerscreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
@@ -8,7 +8,6 @@ import infinumacademy.showsapp.kristinakoneva.Constants
 import infinumacademy.showsapp.kristinakoneva.model.RegisterRequest
 import infinumacademy.showsapp.kristinakoneva.model.RegisterResponse
 import infinumacademy.showsapp.kristinakoneva.networking.ApiModule
-import infinumacademy.showsapp.kristinakoneva.networking.SessionManager
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,7 +49,8 @@ class RegisterViewModel : ViewModel() {
 
     private fun validateLoginForm(email: String?, password: String?, repeatPassword: String?): Boolean {
         val isValidEmail = email != null && email.isNotBlank() && email.matches(Constants.EMAIL_REGEX.toRegex())
-        val isValidPassword = password != null && password.isNotBlank() && password.length >= Constants.MIN_CHARS_FOR_PASSWORD
+        val isValidPassword = password != null && password.isNotBlank() &&
+            password.length >= Constants.MIN_CHARS_FOR_PASSWORD
         val isValidRepeatPassword = password.equals(repeatPassword)
 
         _isValidEmail.value = isValidEmail
@@ -81,7 +81,7 @@ class RegisterViewModel : ViewModel() {
         return registrationResultLiveData
     }
 
-    fun onRegisterButtonClicked(email: String, password: String, sessionManager: SessionManager) {
+    fun onRegisterButtonClicked(email: String, password: String) {
         _apiCallInProgress.value = true
         val registerRequest = RegisterRequest(
             email = email,
@@ -100,7 +100,5 @@ class RegisterViewModel : ViewModel() {
                     registrationResultLiveData.value = false
                 }
             })
-
-
     }
 }

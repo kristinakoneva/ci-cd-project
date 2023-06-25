@@ -1,4 +1,4 @@
-package infinumacademy.showsapp.kristinakoneva.shows_screen
+package infinumacademy.showsapp.kristinakoneva.showsscreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -6,6 +6,7 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import db.ShowsAppDatabase
 import java.lang.IllegalArgumentException
 
+@Suppress("UNCHECKED_CAST")
 class ShowsViewModelFactory(val database: ShowsAppDatabase) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>, extras: CreationExtras): T {
         if (modelClass.isAssignableFrom(ShowsViewModel::class.java)) {

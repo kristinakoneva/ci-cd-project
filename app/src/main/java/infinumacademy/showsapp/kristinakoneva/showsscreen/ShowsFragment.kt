@@ -1,4 +1,4 @@
-package infinumacademy.showsapp.kristinakoneva.shows_screen
+package infinumacademy.showsapp.kristinakoneva.showsscreen
 
 import android.app.AlertDialog
 import android.content.Context
@@ -48,7 +48,12 @@ val Fragment.showsApp: ShowsApplication
         return requireActivity().application as ShowsApplication
     }
 
+@Suppress("TooManyFunctions", "ReturnCount")
 class ShowsFragment : Fragment() {
+
+    companion object {
+        private const val BITMAP_COMPRESS_QUALITY = 50
+    }
 
     private var _binding: FragmentShowsBinding? = null
 
@@ -161,7 +166,11 @@ class ShowsFragment : Fragment() {
                         email = user?.email ?: UserInfo.email
                     }
                 } else {
-                    Toast.makeText(requireContext(), getString(R.string.error_fetching_user_info_msg), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.error_fetching_user_info_msg),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     profilePhotoUrl = UserInfo.imageUrl
                     email = UserInfo.email
                 }
@@ -181,7 +190,11 @@ class ShowsFragment : Fragment() {
                 openDialogForChoosingChangingProfilePhotoMethod()
             } else {
                 // prevent changing the profile photo when the user has no internet connection
-                Toast.makeText(requireContext(), getString(R.string.error_changing_pp_offline_msg), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.error_changing_pp_offline_msg),
+                    Toast.LENGTH_LONG
+                ).show()
             }
             dialog.dismiss()
         }
@@ -245,7 +258,11 @@ class ShowsFragment : Fragment() {
                             adapter.addAllItems(topRatedShows)
                         }
                     } else {
-                        Toast.makeText(requireContext(), getString(R.string.error_fetching_top_rated_shows_msg), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.error_fetching_top_rated_shows_msg),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                 }
@@ -260,7 +277,11 @@ class ShowsFragment : Fragment() {
 
                         }
                     } else {
-                        Toast.makeText(requireContext(), getString(R.string.error_fetching_shows_msg), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.error_fetching_shows_msg),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
@@ -289,7 +310,8 @@ class ShowsFragment : Fragment() {
     private fun showDetailsAbout(show: Show) {
         if (!NetworkLiveData.isNetworkAvailable()) {
             viewModel.getShowsFromDB().observe(viewLifecycleOwner) { list ->
-                // prevent the user from entering ShowDetails screen if there is no internet connection and the database is empty
+                // prevent the user from entering ShowDetails screen
+                // if there is no internet connection and the database is empty
                 if (list.isNullOrEmpty()) {
                     displayState()
                 } else {
@@ -308,6 +330,7 @@ class ShowsFragment : Fragment() {
         _binding = null
     }
 
+    @Suppress("SwallowedException")
     private fun saveToInternalStorage(bitmap: Bitmap, emailAsFileName: String): String? {
 
         val wrapper = ContextWrapper(requireContext().applicationContext)
@@ -316,27 +339,15 @@ class ShowsFragment : Fragment() {
 
         try {
             val stream: OutputStream = FileOutputStream(file)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, BITMAP_COMPRESS_QUALITY, stream)
             stream.flush()
             stream.close()
         } catch (e: IOException) {
-            e.printStackTrace()
+            return null
         }
 
         return file.absolutePath
     }
-
-    //    private fun loadImageFromStorage(path: String) {
-    //        try {
-    //            val f = File(path)
-    //            val b = BitmapFactory.decodeStream(FileInputStream(f))
-    //            binding.btnDialogChangeProfilePicOrLogout.load(b) {
-    //                transformations(CircleCropTransformation())
-    //            }
-    //        } catch (e: FileNotFoundException) {
-    //            e.printStackTrace()
-    //        }
-    //    }
 
     private fun showProfilePhoto() {
         var profilePhotoUrl: String? = null
@@ -348,7 +359,11 @@ class ShowsFragment : Fragment() {
                         profilePhotoUrl = user?.imageUrl ?: UserInfo.imageUrl
                     }
                 } else {
-                    Toast.makeText(requireContext(), getString(R.string.error_fetching_user_info_msg), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.error_fetching_user_info_msg),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     profilePhotoUrl = UserInfo.imageUrl
                 }
                 binding.toolbar.setProfilePhoto(profilePhotoUrl)
@@ -373,7 +388,11 @@ class ShowsFragment : Fragment() {
                         putString(Constants.IMAGE_URL, UserInfo.imageUrl)
                     }
                 } else {
-                    Toast.makeText(requireContext(), getString(R.string.error_changing_profile_photo_msg), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.error_changing_profile_photo_msg),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -388,11 +407,12 @@ class ShowsFragment : Fragment() {
         }
     }
 
-    private val selectImageFromGalleryResult = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        uri?.let {
-            saveProfilePhoto(uri)
+    private val selectImageFromGalleryResult =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.let {
+                saveProfilePhoto(uri)
+            }
         }
-    }
 
     private var latestTmpUri: Uri? = null
 
@@ -413,34 +433,20 @@ class ShowsFragment : Fragment() {
             deleteOnExit()
         }
 
-        return FileProvider.getUriForFile(requireActivity().applicationContext, "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
+        return FileProvider.getUriForFile(
+            requireActivity().applicationContext,
+            "${BuildConfig.APPLICATION_ID}.provider",
+            tmpFile
+        )
     }
 
+    @Suppress("SwallowedException")
     private fun getBitmapFromURI(context: Context, uri: Uri?): Bitmap? {
         try {
             val input = context.contentResolver.openInputStream(uri!!) ?: return null
             return BitmapFactory.decodeStream(input)
         } catch (e: FileNotFoundException) {
+            return null
         }
-        return null
     }
-
-    /*
-    private fun rotateImageIfNecessary(path: String): Bitmap?{
-        val bitmap = BitmapFactory.decodeFile(path)
-        val file = File(path)
-        val exif = ExifInterface(file.absoluteFile.toString())
-        val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)
-        val matrix = Matrix()
-        when(orientation){
-            ExifInterface.ORIENTATION_ROTATE_90 -> matrix.postRotate(90F)
-            ExifInterface.ORIENTATION_ROTATE_180 -> matrix.postRotate(180F)
-            ExifInterface.ORIENTATION_ROTATE_270 -> matrix.postRotate(270F)
-        }
-        val rotatedBitmap = Bitmap.createBitmap(bitmap, 0,0 , bitmap.width, bitmap.height, matrix, true)
-        bitmap.recycle()
-        return rotatedBitmap
-    }*/
-
-
 }

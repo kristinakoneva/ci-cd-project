@@ -1,4 +1,4 @@
-package infinumacademy.showsapp.kristinakoneva.register_screen
+package infinumacademy.showsapp.kristinakoneva.registerscreen
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -15,8 +15,8 @@ import androidx.navigation.fragment.findNavController
 import infinumacademy.showsapp.kristinakoneva.Constants
 import infinumacademy.showsapp.kristinakoneva.R
 import infinumacademy.showsapp.kristinakoneva.databinding.FragmentRegisterBinding
-import infinumacademy.showsapp.kristinakoneva.login_screen.animateBounceFromTop
-import infinumacademy.showsapp.kristinakoneva.login_screen.animateOvershootPopOut
+import infinumacademy.showsapp.kristinakoneva.loginscreen.animateBounceFromTop
+import infinumacademy.showsapp.kristinakoneva.loginscreen.animateOvershootPopOut
 import infinumacademy.showsapp.kristinakoneva.networking.SessionManager
 
 class RegisterFragment : Fragment() {
@@ -53,7 +53,11 @@ class RegisterFragment : Fragment() {
                 val directions = RegisterFragmentDirections.toLoginFragment(comingFromRegister = true)
                 findNavController().navigate(directions)
             } else {
-                Toast.makeText(requireContext(), getString(R.string.unsuccessful_registration_msg), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.unsuccessful_registration_msg),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
@@ -68,8 +72,7 @@ class RegisterFragment : Fragment() {
         binding.btnRegister.setOnClickListener {
             viewModel.onRegisterButtonClicked(
                 email = binding.etEmail.text.toString(),
-                password = binding.etPassword.text.toString(),
-                sessionManager = sessionManager
+                password = binding.etPassword.text.toString()
             )
         }
     }
@@ -129,6 +132,4 @@ class RegisterFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

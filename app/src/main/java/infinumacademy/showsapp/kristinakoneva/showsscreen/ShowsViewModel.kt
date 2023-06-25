@@ -1,4 +1,4 @@
-package infinumacademy.showsapp.kristinakoneva.shows_screen
+package infinumacademy.showsapp.kristinakoneva.showsscreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -74,7 +74,10 @@ class ShowsViewModel(
         _apiCallInProgress.postValue(true)
         _apiCallForGettingLatestUserInfoInProgress.postValue(true)
         ApiModule.retrofit.getMyUserInfo().enqueue(object : Callback<UserInfoResponse> {
-            override fun onResponse(call: Call<UserInfoResponse>, response: Response<UserInfoResponse>) {
+            override fun onResponse(
+                call: Call<UserInfoResponse>,
+                response: Response<UserInfoResponse>
+            ) {
                 if (response.isSuccessful) {
                     val id = response.body()?.user?.id
                     val email = response.body()?.user?.email
@@ -88,7 +91,9 @@ class ShowsViewModel(
                 _getLatestUserInfoResultLiveData.value = response.isSuccessful
                 _apiCallForGettingLatestUserInfoInProgress.value = false
                 _apiCallInProgress.value =
-                    _apiCallForFetchingTopRatedShowsInProgress.value!! || _apiCallForUpdatingProfilePhotoInProgress.value!! || _apiCallForFetchingShowsInProgress.value!!
+                    _apiCallForFetchingTopRatedShowsInProgress.value!! ||
+                        _apiCallForUpdatingProfilePhotoInProgress.value!! ||
+                        _apiCallForFetchingShowsInProgress.value!!
 
             }
 
@@ -96,7 +101,9 @@ class ShowsViewModel(
                 _getLatestUserInfoResultLiveData.value = false
                 _apiCallForGettingLatestUserInfoInProgress.value = false
                 _apiCallInProgress.value =
-                    _apiCallForFetchingTopRatedShowsInProgress.value!! || _apiCallForUpdatingProfilePhotoInProgress.value!! || _apiCallForFetchingShowsInProgress.value!!
+                    _apiCallForFetchingTopRatedShowsInProgress.value!! ||
+                        _apiCallForUpdatingProfilePhotoInProgress.value!! ||
+                        _apiCallForFetchingShowsInProgress.value!!
             }
 
         })
@@ -106,7 +113,10 @@ class ShowsViewModel(
         _apiCallInProgress.postValue(true)
         _apiCallForFetchingShowsInProgress.postValue(true)
         ApiModule.retrofit.fetchShows().enqueue(object : Callback<ShowsResponse> {
-            override fun onResponse(call: Call<ShowsResponse>, response: Response<ShowsResponse>) {
+            override fun onResponse(
+                call: Call<ShowsResponse>,
+                response: Response<ShowsResponse>
+            ) {
 
                 if (response.isSuccessful) {
                     _showsListLiveData.value = response.body()?.shows
@@ -115,14 +125,18 @@ class ShowsViewModel(
                 _listShowsResultLiveData.value = response.isSuccessful
                 _apiCallForFetchingShowsInProgress.value = false
                 _apiCallInProgress.value =
-                    _apiCallForFetchingTopRatedShowsInProgress.value!! || _apiCallForUpdatingProfilePhotoInProgress.value!! || _apiCallForGettingLatestUserInfoInProgress.value!!
+                    _apiCallForFetchingTopRatedShowsInProgress.value!! ||
+                        _apiCallForUpdatingProfilePhotoInProgress.value!! ||
+                        _apiCallForGettingLatestUserInfoInProgress.value!!
             }
 
             override fun onFailure(call: Call<ShowsResponse>, t: Throwable) {
                 _listShowsResultLiveData.value = false
                 _apiCallForFetchingShowsInProgress.value = false
                 _apiCallInProgress.value =
-                    _apiCallForFetchingTopRatedShowsInProgress.value!! || _apiCallForUpdatingProfilePhotoInProgress.value!! || _apiCallForGettingLatestUserInfoInProgress.value!!
+                    _apiCallForFetchingTopRatedShowsInProgress.value!! ||
+                        _apiCallForUpdatingProfilePhotoInProgress.value!! ||
+                        _apiCallForGettingLatestUserInfoInProgress.value!!
             }
 
         })
@@ -132,7 +146,10 @@ class ShowsViewModel(
         _apiCallInProgress.postValue(true)
         _apiCallForFetchingTopRatedShowsInProgress.postValue(true)
         ApiModule.retrofit.fetchTopRatedShows().enqueue(object : Callback<TopRatedShowsResponse> {
-            override fun onResponse(call: Call<TopRatedShowsResponse>, response: Response<TopRatedShowsResponse>) {
+            override fun onResponse(
+                call: Call<TopRatedShowsResponse>,
+                response: Response<TopRatedShowsResponse>
+            ) {
 
                 if (response.isSuccessful) {
                     _topRatedShowsListLiveData.value = response.body()?.shows
@@ -140,14 +157,18 @@ class ShowsViewModel(
                 _listTopRatedShowsResultLiveData.value = response.isSuccessful
                 _apiCallForFetchingTopRatedShowsInProgress.value = false
                 _apiCallInProgress.value =
-                    _apiCallForFetchingShowsInProgress.value!! || _apiCallForUpdatingProfilePhotoInProgress.value!! || _apiCallForGettingLatestUserInfoInProgress.value!!
+                    _apiCallForFetchingShowsInProgress.value!! ||
+                        _apiCallForUpdatingProfilePhotoInProgress.value!! ||
+                        _apiCallForGettingLatestUserInfoInProgress.value!!
             }
 
             override fun onFailure(call: Call<TopRatedShowsResponse>, t: Throwable) {
                 _listTopRatedShowsResultLiveData.value = false
                 _apiCallForFetchingTopRatedShowsInProgress.value = false
                 _apiCallInProgress.value =
-                    _apiCallForFetchingShowsInProgress.value!! || _apiCallForUpdatingProfilePhotoInProgress.value!! || _apiCallForGettingLatestUserInfoInProgress.value!!
+                    _apiCallForFetchingShowsInProgress.value!! ||
+                        _apiCallForUpdatingProfilePhotoInProgress.value!! ||
+                        _apiCallForGettingLatestUserInfoInProgress.value!!
             }
 
         })
@@ -157,24 +178,35 @@ class ShowsViewModel(
         _apiCallInProgress.value = true
         _apiCallForUpdatingProfilePhotoInProgress.value = true
         val requestBody =
-            MultipartBody.Part.createFormData("image", "$fileName.jpg", File(imagePath).asRequestBody("multipart/form-data".toMediaType()))
+            MultipartBody.Part.createFormData(
+                "image",
+                "$fileName.jpg",
+                File(imagePath).asRequestBody("multipart/form-data".toMediaType())
+            )
 
         ApiModule.retrofit.updateProfilePhoto(requestBody).enqueue(object : Callback<UpdateProfilePhotoResponse> {
-            override fun onResponse(call: Call<UpdateProfilePhotoResponse>, response: Response<UpdateProfilePhotoResponse>) {
+            override fun onResponse(
+                call: Call<UpdateProfilePhotoResponse>,
+                response: Response<UpdateProfilePhotoResponse>
+            ) {
                 if (response.isSuccessful) {
                     UserInfo.imageUrl = response.body()?.user?.imageUrl
                 }
                 _updateProfilePhotoResultLiveData.value = response.isSuccessful
                 _apiCallForUpdatingProfilePhotoInProgress.value = false
                 _apiCallInProgress.value =
-                    _apiCallForFetchingShowsInProgress.value!! || _apiCallForFetchingTopRatedShowsInProgress.value!! || _apiCallForGettingLatestUserInfoInProgress.value!!
+                    _apiCallForFetchingShowsInProgress.value!! ||
+                        _apiCallForFetchingTopRatedShowsInProgress.value!! ||
+                        _apiCallForGettingLatestUserInfoInProgress.value!!
             }
 
             override fun onFailure(call: Call<UpdateProfilePhotoResponse>, t: Throwable) {
                 _updateProfilePhotoResultLiveData.value = false
                 _apiCallForUpdatingProfilePhotoInProgress.value = false
                 _apiCallInProgress.value =
-                    _apiCallForFetchingShowsInProgress.value!! || _apiCallForFetchingTopRatedShowsInProgress.value!! || _apiCallForGettingLatestUserInfoInProgress.value!!
+                    _apiCallForFetchingShowsInProgress.value!! ||
+                        _apiCallForFetchingTopRatedShowsInProgress.value!! ||
+                        _apiCallForGettingLatestUserInfoInProgress.value!!
             }
         })
     }
@@ -182,7 +214,14 @@ class ShowsViewModel(
     private fun saveShowsToDatabase(shows: List<Show>?) {
         Executors.newSingleThreadExecutor().execute {
             database.showDao().insertAllShows(shows?.map { show ->
-                ShowEntity(show.id, show.averageRating, show.description, show.imageUrl, show.noOfReviews, show.title)
+                ShowEntity(
+                    show.id,
+                    show.averageRating,
+                    show.description,
+                    show.imageUrl,
+                    show.noOfReviews,
+                    show.title
+                )
             } ?: listOf())
         }
     }
@@ -206,5 +245,4 @@ class ShowsViewModel(
     fun getShowsFromDB(): LiveData<List<ShowEntity>> {
         return database.showDao().getAllShows()
     }
-
 }

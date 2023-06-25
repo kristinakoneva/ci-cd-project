@@ -1,4 +1,4 @@
-package infinumacademy.showsapp.kristinakoneva.login_screen
+package infinumacademy.showsapp.kristinakoneva.loginscreen
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -28,6 +28,7 @@ import infinumacademy.showsapp.kristinakoneva.databinding.FragmentLoginBinding
 import infinumacademy.showsapp.kristinakoneva.networking.Session
 import infinumacademy.showsapp.kristinakoneva.networking.SessionManager
 
+@Suppress("MagicNumber")
 fun ImageView.animateBounceFromTop() {
     y = -1000f
     animate()
@@ -37,6 +38,7 @@ fun ImageView.animateBounceFromTop() {
         .start()
 }
 
+@Suppress("MagicNumber")
 fun TextView.animateOvershootPopOut() {
     val expand = ScaleAnimation(
         0f, 1.0f, 0f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f,
@@ -49,6 +51,7 @@ fun TextView.animateOvershootPopOut() {
     this.animation.start()
 }
 
+@Suppress("TooManyFunctions")
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null

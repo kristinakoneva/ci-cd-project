@@ -13,3 +13,4 @@ data class ShowEntity(
     @ColumnInfo(name = "noOfReviews") val noOfReviews: Int,
     @ColumnInfo(name = "title") val title: String
 )
+

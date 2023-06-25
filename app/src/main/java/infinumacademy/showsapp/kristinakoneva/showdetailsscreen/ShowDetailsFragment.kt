@@ -1,4 +1,4 @@
-package infinumacademy.showsapp.kristinakoneva.show_details_screen
+package infinumacademy.showsapp.kristinakoneva.showdetailsscreen
 
 import android.os.Build
 import android.os.Bundle
@@ -21,9 +21,14 @@ import infinumacademy.showsapp.kristinakoneva.R
 import infinumacademy.showsapp.kristinakoneva.UserInfo
 import infinumacademy.showsapp.kristinakoneva.databinding.DialogAddReviewBinding
 import infinumacademy.showsapp.kristinakoneva.databinding.FragmentShowDetailsBinding
-import infinumacademy.showsapp.kristinakoneva.shows_screen.showsApp
+import infinumacademy.showsapp.kristinakoneva.showsscreen.showsApp
 
+@Suppress("TooManyFunctions")
 class ShowDetailsFragment : Fragment() {
+
+    companion object{
+        private const val REVIEW_RATING_FORMAT = "%.2f"
+    }
 
     private var _binding: FragmentShowDetailsBinding? = null
 
@@ -112,7 +117,7 @@ class ShowDetailsFragment : Fragment() {
                 viewModel.showLiveData.observe(viewLifecycleOwner) { show ->
                     val numOfReviews = show.noOfReviews
                     val averageRating = show.averageRating
-                    binding.ratingStatus.rating = String.format("%.2f", averageRating).toFloat()
+                    binding.ratingStatus.rating = String.format(REVIEW_RATING_FORMAT, averageRating).toFloat()
                     binding.reviewsStatus.text = getString(R.string.review_status, numOfReviews, averageRating)
                 }
             } else {
@@ -121,18 +126,6 @@ class ShowDetailsFragment : Fragment() {
         }
 
     }
-
-    /*
-    private fun setReviewsStatus() {
-        val numOfReviews = viewModel.reviewsListLiveData.value?.size
-        val averageRating = viewModel.getAverageReviewsRating().toFloat()
-        viewModel.reviewsListLiveData.observe(viewLifecycleOwner){ reviewsList->
-            if(reviewsList.isNotEmpty()){
-                binding.ratingStatus.rating = String.format("%.2f", averageRating).toFloat()
-                binding.reviewsStatus.text = getString(R.string.review_status, numOfReviews, averageRating)
-            }
-        }
-    }*/
 
     private fun initBackButtonFromToolbar() {
         binding.showDetailsToolbar.setNavigationOnClickListener {
@@ -147,7 +140,11 @@ class ShowDetailsFragment : Fragment() {
                     adapter.addAllItems(reviewsList)
                 }
             } else {
-                Toast.makeText(requireContext(), getString(R.string.error_fetching_reviews_msg), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.error_fetching_reviews_msg),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
         viewModel.reviewsListLiveData.observe(viewLifecycleOwner) { reviewsList ->
@@ -225,4 +222,3 @@ class ShowDetailsFragment : Fragment() {
         _binding = null
     }
 }
-

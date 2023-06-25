@@ -23,7 +23,8 @@ object NetworkLiveData : LiveData<Boolean>() {
             .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
             .build()
         networkCallback = getNetworkCallBack()
-        connectivityManager = NetworkLiveData.application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        connectivityManager = NetworkLiveData.application
+            .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     }
 
     override fun onActive() {
@@ -59,6 +60,7 @@ object NetworkLiveData : LiveData<Boolean>() {
         connectivityManager.registerNetworkCallback(networkRequest, networkCallback)
     }
 
+    @Suppress("ReturnCount")
     fun isNetworkAvailable(): Boolean {
         val connectivityManager =
             application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -81,5 +83,4 @@ object NetworkLiveData : LiveData<Boolean>() {
             return activeNetwork != null && activeNetwork.isConnected
         }
     }
-
 }
