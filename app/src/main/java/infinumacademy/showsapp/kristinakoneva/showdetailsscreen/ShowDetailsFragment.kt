@@ -148,7 +148,11 @@ class ShowDetailsFragment : Fragment() {
                     adapter.addAllItems(reviewsList)
                 }
             } else {
-                Toast.makeText(requireContext(), getString(R.string.error_fetching_reviews_msg), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.error_fetching_reviews_msg),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
         viewModel.reviewsListLiveData.observe(viewLifecycleOwner) { reviewsList ->

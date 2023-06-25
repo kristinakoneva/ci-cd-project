@@ -162,7 +162,11 @@ class ShowsFragment : Fragment() {
                         email = user?.email ?: UserInfo.email
                     }
                 } else {
-                    Toast.makeText(requireContext(), getString(R.string.error_fetching_user_info_msg), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.error_fetching_user_info_msg),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     profilePhotoUrl = UserInfo.imageUrl
                     email = UserInfo.email
                 }
@@ -182,7 +186,11 @@ class ShowsFragment : Fragment() {
                 openDialogForChoosingChangingProfilePhotoMethod()
             } else {
                 // prevent changing the profile photo when the user has no internet connection
-                Toast.makeText(requireContext(), getString(R.string.error_changing_pp_offline_msg), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.error_changing_pp_offline_msg),
+                    Toast.LENGTH_LONG
+                ).show()
             }
             dialog.dismiss()
         }
@@ -246,7 +254,11 @@ class ShowsFragment : Fragment() {
                             adapter.addAllItems(topRatedShows)
                         }
                     } else {
-                        Toast.makeText(requireContext(), getString(R.string.error_fetching_top_rated_shows_msg), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.error_fetching_top_rated_shows_msg),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                 }
@@ -261,7 +273,11 @@ class ShowsFragment : Fragment() {
 
                         }
                     } else {
-                        Toast.makeText(requireContext(), getString(R.string.error_fetching_shows_msg), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            getString(R.string.error_fetching_shows_msg),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
@@ -290,7 +306,8 @@ class ShowsFragment : Fragment() {
     private fun showDetailsAbout(show: Show) {
         if (!NetworkLiveData.isNetworkAvailable()) {
             viewModel.getShowsFromDB().observe(viewLifecycleOwner) { list ->
-                // prevent the user from entering ShowDetails screen if there is no internet connection and the database is empty
+                // prevent the user from entering ShowDetails screen
+                // if there is no internet connection and the database is empty
                 if (list.isNullOrEmpty()) {
                     displayState()
                 } else {
@@ -349,7 +366,11 @@ class ShowsFragment : Fragment() {
                         profilePhotoUrl = user?.imageUrl ?: UserInfo.imageUrl
                     }
                 } else {
-                    Toast.makeText(requireContext(), getString(R.string.error_fetching_user_info_msg), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.error_fetching_user_info_msg),
+                        Toast.LENGTH_SHORT
+                    ).show()
                     profilePhotoUrl = UserInfo.imageUrl
                 }
                 binding.toolbar.setProfilePhoto(profilePhotoUrl)
@@ -374,7 +395,11 @@ class ShowsFragment : Fragment() {
                         putString(Constants.IMAGE_URL, UserInfo.imageUrl)
                     }
                 } else {
-                    Toast.makeText(requireContext(), getString(R.string.error_changing_profile_photo_msg), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.error_changing_profile_photo_msg),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }
@@ -389,11 +414,12 @@ class ShowsFragment : Fragment() {
         }
     }
 
-    private val selectImageFromGalleryResult = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        uri?.let {
-            saveProfilePhoto(uri)
+    private val selectImageFromGalleryResult =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.let {
+                saveProfilePhoto(uri)
+            }
         }
-    }
 
     private var latestTmpUri: Uri? = null
 
@@ -414,7 +440,11 @@ class ShowsFragment : Fragment() {
             deleteOnExit()
         }
 
-        return FileProvider.getUriForFile(requireActivity().applicationContext, "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
+        return FileProvider.getUriForFile(
+            requireActivity().applicationContext,
+            "${BuildConfig.APPLICATION_ID}.provider",
+            tmpFile
+        )
     }
 
     private fun getBitmapFromURI(context: Context, uri: Uri?): Bitmap? {

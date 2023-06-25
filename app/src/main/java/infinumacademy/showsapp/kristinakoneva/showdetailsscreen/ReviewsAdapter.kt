@@ -39,7 +39,8 @@ class ReviewsAdapter(
         return username
     }
 
-    inner class ShowDetailsViewHolder(private val binding: ViewReviewItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ShowDetailsViewHolder(private val binding: ViewReviewItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Review) {
             with(binding) {
                 reviewRating.text = item.rating.toString()

@@ -64,19 +64,24 @@ class ShowDetailsViewModel(
         _apiCallForFetchingShowInProgress.postValue(true)
         _apiCallInProgress.postValue(true)
         ApiModule.retrofit.displayShow(showId).enqueue(object : Callback<DisplayShowResponse> {
-            override fun onResponse(call: retrofit2.Call<DisplayShowResponse>, response: Response<DisplayShowResponse>) {
+            override fun onResponse(
+                call: retrofit2.Call<DisplayShowResponse>,
+                response: Response<DisplayShowResponse>
+            ) {
                 _getShowResultLiveData.value = response.isSuccessful
                 if (response.isSuccessful) {
                     _showLiveData.value = response.body()?.show
                 }
                 _apiCallForFetchingShowInProgress.value = false
-                _apiCallInProgress.value = _apiCallForFetchingReviewsInProgress.value!! || _apiCallForCreatingReviewInProgress.value!!
+                _apiCallInProgress.value =
+                    _apiCallForFetchingReviewsInProgress.value!! || _apiCallForCreatingReviewInProgress.value!!
             }
 
             override fun onFailure(call: retrofit2.Call<DisplayShowResponse>, t: Throwable) {
                 _getShowResultLiveData.value = false
                 _apiCallForFetchingShowInProgress.value = false
-                _apiCallInProgress.value = _apiCallForFetchingReviewsInProgress.value!! || _apiCallForCreatingReviewInProgress.value!!
+                _apiCallInProgress.value =
+                    _apiCallForFetchingReviewsInProgress.value!! || _apiCallForCreatingReviewInProgress.value!!
             }
 
         })
@@ -91,19 +96,24 @@ class ShowDetailsViewModel(
             showId = showId
         )
         ApiModule.retrofit.createReview(request).enqueue(object : Callback<CreateReviewResponse> {
-            override fun onResponse(call: retrofit2.Call<CreateReviewResponse>, response: Response<CreateReviewResponse>) {
+            override fun onResponse(
+                call: retrofit2.Call<CreateReviewResponse>,
+                response: Response<CreateReviewResponse>
+            ) {
                 if (response.isSuccessful) {
                     response.body()?.review?.let { review ->
                         _reviewsListLiveData.value = _reviewsListLiveData.value?.plus(review)
                     }
                 }
                 _apiCallForCreatingReviewInProgress.value = false
-                _apiCallInProgress.value = _apiCallForFetchingShowInProgress.value!! || _apiCallForFetchingReviewsInProgress.value!!
+                _apiCallInProgress.value =
+                    _apiCallForFetchingShowInProgress.value!! || _apiCallForFetchingReviewsInProgress.value!!
             }
 
             override fun onFailure(call: retrofit2.Call<CreateReviewResponse>, t: Throwable) {
                 _apiCallForCreatingReviewInProgress.value = false
-                _apiCallInProgress.value = _apiCallForFetchingShowInProgress.value!! || _apiCallForFetchingReviewsInProgress.value!!
+                _apiCallInProgress.value =
+                    _apiCallForFetchingShowInProgress.value!! || _apiCallForFetchingReviewsInProgress.value!!
             }
 
         })
@@ -113,20 +123,25 @@ class ShowDetailsViewModel(
         _apiCallForFetchingReviewsInProgress.postValue(true)
         _apiCallInProgress.postValue(true)
         ApiModule.retrofit.fetchReviewsAboutShow(showId).enqueue(object : Callback<ReviewsResponse> {
-            override fun onResponse(call: retrofit2.Call<ReviewsResponse>, response: Response<ReviewsResponse>) {
+            override fun onResponse(
+                call: retrofit2.Call<ReviewsResponse>,
+                response: Response<ReviewsResponse>
+            ) {
                 _fetchReviewsResultLiveData.value = response.isSuccessful
                 if (response.isSuccessful) {
                     _reviewsListLiveData.value = response.body()?.reviews
                     saveReviewsToDatabase(response.body()?.reviews)
                 }
                 _apiCallForFetchingReviewsInProgress.value = false
-                _apiCallInProgress.value = _apiCallForFetchingShowInProgress.value!! || _apiCallForCreatingReviewInProgress.value!!
+                _apiCallInProgress.value =
+                    _apiCallForFetchingShowInProgress.value!! || _apiCallForCreatingReviewInProgress.value!!
             }
 
             override fun onFailure(call: retrofit2.Call<ReviewsResponse>, t: Throwable) {
                 _fetchReviewsResultLiveData.value = false
                 _apiCallForFetchingReviewsInProgress.value = false
-                _apiCallInProgress.value = _apiCallForFetchingShowInProgress.value!! || _apiCallForCreatingReviewInProgress.value!!
+                _apiCallInProgress.value =
+                    _apiCallForFetchingShowInProgress.value!! || _apiCallForCreatingReviewInProgress.value!!
             }
 
         })
@@ -175,9 +190,27 @@ class ShowDetailsViewModel(
         }
     }
 
-    fun addReviewToDatabase(rating: Int, comment: String?, userId: String, userEmail: String, userImageUrl: String?) {
+    fun addReviewToDatabase(
+        rating: Int,
+        comment: String?,
+        userId: String,
+        userEmail: String,
+        userImageUrl: String?
+    ) {
         Executors.newSingleThreadExecutor().execute {
-            database.reviewDao().insertAllReviews(listOf(ReviewEntity(0, comment, rating, showId, userId, userEmail, userImageUrl)))
+            database.reviewDao().insertAllReviews(
+                listOf(
+                    ReviewEntity(
+                        0,
+                        comment,
+                        rating,
+                        showId,
+                        userId,
+                        userEmail,
+                        userImageUrl
+                    )
+                )
+            )
         }
     }
 

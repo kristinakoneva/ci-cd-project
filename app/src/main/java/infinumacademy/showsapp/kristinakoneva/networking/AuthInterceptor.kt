@@ -12,7 +12,9 @@ class AuthInterceptor(context: Context) : Interceptor {
         val requestBuilder = chain.request().newBuilder()
         requestBuilder.addHeader(Constants.TOKEN_TYPE, Constants.BEARER)
 
-        if (Session.accessToken != null && Session.client != null && Session.uid != null && Session.expiry != null && Session.contentType != null) {
+        if (Session.accessToken != null && Session.client != null &&
+            Session.uid != null && Session.expiry != null && Session.contentType != null
+        ) {
             requestBuilder.addHeader(Constants.ACCESS_TOKEN, Session.accessToken!!)
             requestBuilder.addHeader(Constants.CLIENT, Session.client!!)
             requestBuilder.addHeader(Constants.EXPIRY, Session.expiry!!)

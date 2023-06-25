@@ -23,7 +23,8 @@ object NetworkLiveData : LiveData<Boolean>() {
             .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
             .build()
         networkCallback = getNetworkCallBack()
-        connectivityManager = NetworkLiveData.application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        connectivityManager = NetworkLiveData.application
+            .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     }
 
     override fun onActive() {
