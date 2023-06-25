@@ -133,6 +133,4 @@ class RegisterFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

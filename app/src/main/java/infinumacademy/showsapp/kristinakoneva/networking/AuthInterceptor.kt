@@ -39,8 +39,6 @@ class AuthInterceptor(context: Context) : Interceptor {
             }
         }
 
-
-
         return chain.proceed(requestBuilder.build())
     }
 }

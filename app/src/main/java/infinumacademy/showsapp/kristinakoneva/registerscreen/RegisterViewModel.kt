@@ -101,7 +101,5 @@ class RegisterViewModel : ViewModel() {
                     registrationResultLiveData.value = false
                 }
             })
-
-
     }
 }

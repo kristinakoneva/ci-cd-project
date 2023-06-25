@@ -230,4 +230,3 @@ class ShowDetailsFragment : Fragment() {
         _binding = null
     }
 }
-

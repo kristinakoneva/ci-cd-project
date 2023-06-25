@@ -7,4 +7,3 @@ import kotlinx.serialization.Serializable
 data class RegisterResponse(
     @SerialName("user") val user: User
 )
-

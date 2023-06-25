@@ -34,5 +34,4 @@ class ToolbarWithProfilePhotoView @JvmOverloads constructor(
     fun setClickListener(listener: OnClickListener) {
         binding.btnDialogChangeProfilePicOrLogout.setOnClickListener(listener)
     }
-
 }

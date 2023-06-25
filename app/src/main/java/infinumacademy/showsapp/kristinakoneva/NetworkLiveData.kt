@@ -82,5 +82,4 @@ object NetworkLiveData : LiveData<Boolean>() {
             return activeNetwork != null && activeNetwork.isConnected
         }
     }
-
 }

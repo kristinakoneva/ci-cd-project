@@ -242,5 +242,4 @@ class ShowsViewModel(
     fun getShowsFromDB(): LiveData<List<ShowEntity>> {
         return database.showDao().getAllShows()
     }
-
 }

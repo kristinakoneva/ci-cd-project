@@ -472,6 +472,4 @@ class ShowsFragment : Fragment() {
         bitmap.recycle()
         return rotatedBitmap
     }*/
-
-
 }

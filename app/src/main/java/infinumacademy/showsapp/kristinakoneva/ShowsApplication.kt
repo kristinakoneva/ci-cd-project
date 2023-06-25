@@ -15,5 +15,4 @@ class ShowsApplication : Application() {
         ApiModule.initRetrofit(this)
         NetworkLiveData.init(this)
     }
-
 }

@@ -7,4 +7,3 @@ import kotlinx.serialization.Serializable
 data class ShowsResponse(
     @SerialName("shows") val shows: List<Show>
 )
-

@@ -9,3 +9,4 @@ data class CreateReviewRequest(
     @SerialName("comment") val comment: String?,
     @SerialName("show_id") val showId: Int
 )
+
