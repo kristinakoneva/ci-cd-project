@@ -1,4 +1,4 @@
-package infinumacademy.showsapp.kristinakoneva.register_screen
+package infinumacademy.showsapp.kristinakoneva.registerscreen
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -15,8 +15,8 @@ import androidx.navigation.fragment.findNavController
 import infinumacademy.showsapp.kristinakoneva.Constants
 import infinumacademy.showsapp.kristinakoneva.R
 import infinumacademy.showsapp.kristinakoneva.databinding.FragmentRegisterBinding
-import infinumacademy.showsapp.kristinakoneva.login_screen.animateBounceFromTop
-import infinumacademy.showsapp.kristinakoneva.login_screen.animateOvershootPopOut
+import infinumacademy.showsapp.kristinakoneva.loginscreen.animateBounceFromTop
+import infinumacademy.showsapp.kristinakoneva.loginscreen.animateOvershootPopOut
 import infinumacademy.showsapp.kristinakoneva.networking.SessionManager
 
 class RegisterFragment : Fragment() {

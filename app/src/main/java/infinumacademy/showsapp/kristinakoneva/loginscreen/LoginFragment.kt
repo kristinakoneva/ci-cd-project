@@ -1,4 +1,4 @@
-package infinumacademy.showsapp.kristinakoneva.login_screen
+package infinumacademy.showsapp.kristinakoneva.loginscreen
 
 import android.content.Context
 import android.content.SharedPreferences

@@ -1,4 +1,4 @@
-package infinumacademy.showsapp.kristinakoneva.login_screen
+package infinumacademy.showsapp.kristinakoneva.loginscreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData

@@ -1,4 +1,4 @@
-package infinumacademy.showsapp.kristinakoneva.shows_screen
+package infinumacademy.showsapp.kristinakoneva.showsscreen
 
 import android.app.AlertDialog
 import android.content.Context

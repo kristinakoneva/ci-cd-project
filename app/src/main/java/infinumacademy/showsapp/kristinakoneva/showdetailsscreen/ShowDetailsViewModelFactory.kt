@@ -1,4 +1,4 @@
-package infinumacademy.showsapp.kristinakoneva.show_details_screen
+package infinumacademy.showsapp.kristinakoneva.showdetailsscreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

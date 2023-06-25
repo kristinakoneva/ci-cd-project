@@ -1,4 +1,4 @@
-package infinumacademy.showsapp.kristinakoneva.show_details_screen
+package infinumacademy.showsapp.kristinakoneva.showdetailsscreen
 
 import android.os.Build
 import android.os.Bundle
@@ -21,7 +21,7 @@ import infinumacademy.showsapp.kristinakoneva.R
 import infinumacademy.showsapp.kristinakoneva.UserInfo
 import infinumacademy.showsapp.kristinakoneva.databinding.DialogAddReviewBinding
 import infinumacademy.showsapp.kristinakoneva.databinding.FragmentShowDetailsBinding
-import infinumacademy.showsapp.kristinakoneva.shows_screen.showsApp
+import infinumacademy.showsapp.kristinakoneva.showsscreen.showsApp
 
 @Suppress("TooManyFunctions")
 class ShowDetailsFragment : Fragment() {

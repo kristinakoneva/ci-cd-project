@@ -1,4 +1,4 @@
-package infinumacademy.showsapp.kristinakoneva.shows_screen
+package infinumacademy.showsapp.kristinakoneva.showsscreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

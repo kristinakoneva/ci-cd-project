@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/showsFragment"
-        android:name="infinumacademy.showsapp.kristinakoneva.shows_screen.ShowsFragment"
+        android:name="infinumacademy.showsapp.kristinakoneva.showsscreen.ShowsFragment"
         android:label="ShowsFragment"
         tools:layout="@layout/fragment_shows">
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/showDetailsFragment"
-        android:name="infinumacademy.showsapp.kristinakoneva.show_details_screen.ShowDetailsFragment"
+        android:name="infinumacademy.showsapp.kristinakoneva.showdetailsscreen.ShowDetailsFragment"
         android:label="ShowDetailsFragment"
         tools:layout="@layout/fragment_show_details">
         <argument
