@@ -51,6 +51,10 @@ val Fragment.showsApp: ShowsApplication
 @Suppress("TooManyFunctions")
 class ShowsFragment : Fragment() {
 
+    companion object {
+        private const val BITMAP_COMPRESS_QUALITY = 50
+    }
+
     private var _binding: FragmentShowsBinding? = null
 
     private val binding get() = _binding!!
@@ -334,7 +338,7 @@ class ShowsFragment : Fragment() {
 
         try {
             val stream: OutputStream = FileOutputStream(file)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, BITMAP_COMPRESS_QUALITY, stream)
             stream.flush()
             stream.close()
         } catch (e: IOException) {
