@@ -16,6 +16,7 @@ class SessionManager(context: Context) {
         saveContentType(contentType)
     }
 
+    // Demo
     fun clearSession() {
         val editor = prefs.edit()
         editor.putString(Constants.ACCESS_TOKEN, null)
